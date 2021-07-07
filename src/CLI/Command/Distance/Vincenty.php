@@ -32,7 +32,7 @@ class Vincenty extends \Symfony\Component\Console\Command\Command
 
         $this
             ->setName('distance:vincenty')
-            ->setDescription('Compute the distance between 2 coordinates using the vincenty algorithm,  in meters by default')
+            ->setDescription('Compute the distance between 2 coordinates using the vincenty algorithm, in meters by default')
             ->addArgument('origin', InputArgument::REQUIRED, 'The origin "Lat,Long" coordinate')
             ->addArgument('destination', InputArgument::REQUIRED, 'The destination "Lat,Long" coordinate')
             ->addOption('km', null, InputOption::VALUE_NONE, 'If set, the distance will be shown in kilometers')

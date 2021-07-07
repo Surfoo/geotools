@@ -6,10 +6,7 @@ use League\Geotools\ArrayCollection;
 
 class ArrayCollectionTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function itShouldBeConvertibleToArray()
+    public function testItShouldBeConvertibleToArray()
     {
         $array = ['foo', 'bar'];
 
@@ -18,10 +15,7 @@ class ArrayCollectionTest extends TestCase
         $this->assertEquals($array, $collection->toArray());
     }
 
-    /**
-     * @test
-     */
-    public function itShouldSerializeTheInnerElements()
+    public function testItShouldSerializeTheInnerElements()
     {
         $array = ['foo', 'bar'];
 
@@ -30,10 +24,7 @@ class ArrayCollectionTest extends TestCase
         $this->assertEquals(json_encode($array), json_encode($collection));
     }
 
-    /**
-     * @test
-     */
-    public function itShouldBehaveAsAnArray()
+    public function testItShouldBehaveAsAnArray()
     {
         $array = ['foo', 'baz'=>'bar'];
 
@@ -51,10 +42,7 @@ class ArrayCollectionTest extends TestCase
         $this->assertFalse(isset($collection[99]));
     }
 
-    /**
-     * @test
-     */
-    public function itShouldBeCountable()
+    public function testItShouldBeCountable()
     {
         $array = ['foo', 'bar'];
 
@@ -63,10 +51,7 @@ class ArrayCollectionTest extends TestCase
         $this->assertEquals(2, count($collection));
     }
 
-    /**
-     * @test
-     */
-    public function itShouldOfferAccessToInnerElementsByKey()
+    public function testItShouldOfferAccessToInnerElementsByKey()
     {
         $array = ['foo' => 'bar'];
 
@@ -86,10 +71,7 @@ class ArrayCollectionTest extends TestCase
         $this->assertNull($collection->remove('dummy'));
     }
 
-    /**
-     * @test
-     */
-    public function itShouldMergeCollections()
+    public function testItShouldMergeCollections()
     {
         $array1 = ['foo' => 'bar'];
         $array2 = ['dummy' => 'baz'];

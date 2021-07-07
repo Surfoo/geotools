@@ -115,10 +115,7 @@ class BoundingBoxTest extends \League\Geotools\Tests\TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itShouldThrowAnExceptionWhenEllipsoidsDontMatch()
+    public function testItShouldThrowAnExceptionWhenEllipsoidsDontMatch()
     {
         $bb = new BoundingBox(
             new Polygon([new Coordinate([-1, -2], Ellipsoid::createFromName(Ellipsoid::AUSTRALIAN_NATIONAL))])
@@ -129,10 +126,7 @@ class BoundingBoxTest extends \League\Geotools\Tests\TestCase
         $bb->setPolygon($polygon);
     }
 
-    /**
-     * @test
-     */
-    public function itShouldReturnThePolygonRectangleOfTheBoundingBox()
+    public function testItShouldReturnThePolygonRectangleOfTheBoundingBox()
     {
         $bb = new BoundingBox();
 
@@ -158,10 +152,7 @@ class BoundingBoxTest extends \League\Geotools\Tests\TestCase
         $this->assertEquals($expected, $polygon);
     }
 
-    /**
-     * @test
-     */
-    public function itShouldMergeBoundingBoxes()
+    public function testItShouldMergeBoundingBoxes()
     {
         $bb = new BoundingBox(
             new Polygon([

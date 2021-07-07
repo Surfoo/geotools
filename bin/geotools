@@ -10,12 +10,6 @@
  * file that was distributed with this source code.
  */
 
-function includeIfExists($file)
-{
-    if (file_exists($file)) {
-        return include $file;
-    }
-}
 
 if (!extension_loaded('curl') || !function_exists('curl_init')) {
     die(<<<EOT
@@ -24,46 +18,34 @@ EOT
     );
 }
 
-if ((!$loader = includeIfExists(__DIR__ . '/../vendor/autoload.php')) &&
-    (!$loader = includeIfExists(__DIR__ . '/../../../autoload.php'))) {
-        die(<<<EOT
-You must set up the project dependencies, run the following commands:
-$ wget http://getcomposer.org/composer.phar
-OR
-$ curl -sS https://getcomposer.org/installer | php
-$ php composer.phar install --dev
-EOT
-    );
-}
+require dirname(__DIR__).'/vendor/autoload.php';
 
-use League\Geotools\CLI\Application;
+use League\Geotools\CLI\Application as GeotoolsApplication;
 use League\Geotools\CLI\Command\Convert;
 use League\Geotools\CLI\Command\Distance;
 use League\Geotools\CLI\Command\Geocoder;
 use League\Geotools\CLI\Command\Geohash;
 use League\Geotools\CLI\Command\Vertex;
-use League\Geotools\Geotools;
 
-$geotools = new Geotools;
-$console = new Application;
-$console->setName('Geotools :: Geo-related tools PHP 5.3+ library');
-$console->setVersion($geotools::VERSION);
-$console->add(new Convert\DM);
-$console->add(new Convert\DMS);
-$console->add(new Convert\UTM);
-$console->add(new Distance\All);
-$console->add(new Distance\Flat);
-$console->add(new Distance\GreatCircle);
-$console->add(new Distance\Haversine);
-$console->add(new Distance\Vincenty);
-$console->add(new Geocoder\Geocode);
-$console->add(new Geocoder\Reverse);
-$console->add(new Geohash\Decode);
-$console->add(new Geohash\Encode);
-$console->add(new Vertex\Destination);
-$console->add(new Vertex\FinalBearing);
-$console->add(new Vertex\FinalCardinal);
-$console->add(new Vertex\InitialBearing);
-$console->add(new Vertex\InitialCardinal);
-$console->add(new Vertex\Middle);
-$console->run();
+$application = new GeotoolsApplication();
+$application->setName('Geotools :: Geo-related tools PHP 7.3+ library');
+
+$application->add(new Convert\DM);
+$application->add(new Convert\DMS);
+$application->add(new Convert\UTM);
+$application->add(new Distance\All);
+$application->add(new Distance\Flat);
+$application->add(new Distance\GreatCircle);
+$application->add(new Distance\Haversine);
+$application->add(new Distance\Vincenty);
+$application->add(new Geocoder\Geocode);
+$application->add(new Geocoder\Reverse);
+$application->add(new Geohash\Decode);
+$application->add(new Geohash\Encode);
+$application->add(new Vertex\Destination);
+$application->add(new Vertex\FinalBearing);
+$application->add(new Vertex\FinalCardinal);
+$application->add(new Vertex\InitialBearing);
+$application->add(new Vertex\InitialCardinal);
+$application->add(new Vertex\Middle);
+$application->run();

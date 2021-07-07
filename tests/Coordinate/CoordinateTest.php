@@ -113,8 +113,8 @@ class CoordinateTest extends \League\Geotools\Tests\TestCase
                 array('40.446195', '-79.948862')
             ),
             array(
-                '40°26.7717 -79°56.93172',
-                array('40.446195', '-79.948862')
+                '-40°26.7717 -79°56.93172',
+                array('-40.446195', '-79.948862')
             ),
             array(
                 '40°26.7717S, 79°56.93172E',
@@ -360,5 +360,32 @@ class CoordinateTest extends \League\Geotools\Tests\TestCase
 
         $this->assertSame('40.4463888888889', $coordinate->getLatitude());
         $this->assertSame('-79.9766666666667', $coordinate->getLongitude());
+    }
+
+    public function testGetPrecision()
+    {
+        $coordinate = new Coordinate($this->createEmptyAddress());
+        $this->assertEquals(8, $coordinate->getPrecision());
+    }
+
+    public function testSetPrecision()
+    {
+        $coordinate = new Coordinate($this->createEmptyAddress());
+        $coordinate->setPrecision(3);
+        $this->assertEquals(3, $coordinate->getPrecision());
+    }
+
+    public function testJsonSerialize()
+    {
+        $coordinate = new Coordinate($this->createEmptyAddress());
+        $this->assertEquals([null, null], $coordinate->jsonSerialize());
+    }
+
+    public function testIsEqual()
+    {
+        $coordinates = new Coordinate($this->createAddress(['40.446195', '-79.948862']));
+        $coordinatesToCheck = new Coordinate($this->createAddress(['40.446195', '-79.948862']));
+
+        $this->assertTrue($coordinates->isEqual($coordinatesToCheck));
     }
 }

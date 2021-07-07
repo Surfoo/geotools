@@ -20,10 +20,7 @@ class GeometryCollectionTest extends TestCase
         $this->secondGeometry = new Polygon(new CoordinateCollection([new Coordinate([2, 2])]));
     }
 
-    /**
-     * @test
-     */
-    public function itShouldHaveThePrecisionOfTheLessPreciseGeometryComponent()
+    public function testItShouldHaveThePrecisionOfTheLessPreciseGeometryComponent()
     {
         $this->firstGeometry->setPrecision(5);
         $this->secondGeometry->setPrecision(10);
@@ -34,20 +31,14 @@ class GeometryCollectionTest extends TestCase
         $this->assertEquals(10, $collection->getPrecision());
     }
 
-    /**
-     * @test
-     */
-    public function itShouldReturnNullIfItHasNoGeometry()
+    public function testItShouldReturnNullIfItHasNoGeometry()
     {
         $collection = new SimpleGeometryCollection();
 
         $this->assertNull($collection->getCoordinate());
     }
 
-    /**
-     * @test
-     */
-    public function itShouldReturnTheCoordinateOfItsFirstGeometry()
+    public function testItShouldReturnTheCoordinateOfItsFirstGeometry()
     {
         $array = [$this->firstGeometry, $this->secondGeometry];
 
@@ -56,10 +47,7 @@ class GeometryCollectionTest extends TestCase
         $this->assertEquals(new Coordinate([1, 1]), $collection->getCoordinate());
     }
 
-    /**
-     * @test
-     */
-    public function itShouldReturnAnArrayOfAllTheCoordinatesOfItsGeometries()
+    public function testItShouldReturnAnArrayOfAllTheCoordinatesOfItsGeometries()
     {
         $array = [$this->firstGeometry, $this->secondGeometry];
 
@@ -71,10 +59,7 @@ class GeometryCollectionTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itShouldReturnTheMergedBoundingBoxOfAllItsGeometries()
+    public function testItShouldReturnTheMergedBoundingBoxOfAllItsGeometries()
     {
         $array = [$this->firstGeometry, $this->secondGeometry];
 
@@ -86,10 +71,7 @@ class GeometryCollectionTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function itShouldReturnTheEllipsoidOfItsFirstGeometry()
+    public function testItShouldReturnTheEllipsoidOfItsFirstGeometry()
     {
         $array = [$this->firstGeometry];
 
@@ -98,10 +80,7 @@ class GeometryCollectionTest extends TestCase
         $this->assertEquals($this->firstGeometry->getEllipsoid(), $collection->getEllipsoid());
     }
 
-    /**
-     * @test
-     */
-    public function itShouldBehaveAsAnArrayOfGeometries()
+    public function testItShouldBehaveAsAnArrayOfGeometries()
     {
         $array = [$this->firstGeometry];
 
@@ -117,10 +96,7 @@ class GeometryCollectionTest extends TestCase
         $this->assertFalse(isset($collection['test']));
     }
 
-    /**
-     * @test
-     */
-    public function itShouldThrowAnExceptionWhenNotProvidedAGeometry()
+    public function testItShouldThrowAnExceptionWhenNotProvidedAGeometry()
     {
         $array = ['a'];
 
@@ -129,10 +105,7 @@ class GeometryCollectionTest extends TestCase
         $collection = new SimpleGeometryCollection($array);
     }
 
-    /**
-     * @test
-     */
-    public function itShouldThrowAnExceptionWhenProvidedAnInvalidGeometry()
+    public function testItShouldThrowAnExceptionWhenProvidedAnInvalidGeometry()
     {
         $array = [$this->firstGeometry];
 
@@ -154,10 +127,7 @@ class GeometryCollectionTest extends TestCase
         $collection->add($secondGeometry);
     }
 
-    /**
-     * @test
-     */
-    public function itShouldBeCountable()
+    public function testItShouldBeCountable()
     {
         $array = [$this->secondGeometry];
 
@@ -166,10 +136,7 @@ class GeometryCollectionTest extends TestCase
         $this->assertEquals(1, count($collection));
     }
 
-    /**
-     * @test
-     */
-    public function itShouldOfferAccessToInnerElementsByKey()
+    public function testItShouldOfferAccessToInnerElementsByKey()
     {
         $array = ['foo' => $this->firstGeometry];
 
@@ -189,10 +156,7 @@ class GeometryCollectionTest extends TestCase
         $this->assertNull($collection->remove('dummy'));
     }
 
-    /**
-     * @test
-     */
-    public function itShouldMergeCollections()
+    public function testItShouldMergeCollections()
     {
         $array1 = ['foo' => $this->firstGeometry];
         $array2 = ['dummy' => $this->secondGeometry];
@@ -215,10 +179,7 @@ class GeometryCollectionTest extends TestCase
         $this->assertEquals(array_merge($array1, $array2), $mergedCollection->toArray());
     }
 
-    /**
-     * @test
-     */
-    public function itShouldThorwAnExceptionWhenMergingDifferentTypesCollections()
+    public function testItShouldThorwAnExceptionWhenMergingDifferentTypesCollections()
     {
         $array1 = ['foo' => $this->firstGeometry];
         $array2 = ['dummy' => $this->secondGeometry];
